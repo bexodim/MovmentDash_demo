@@ -1,0 +1,12 @@
+<header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+      	<%= link_to image_tag("KMD_Logo.png", :size => "209x50"), root_path, :class => 'brand' %>
+      </nav>
+</header>
+    <div class="enter content">
+		<%= button_to 'Login', new_user_session_path, :method => "get", :id => 'menu_login', :class => "btn btn-primary btn-large btn-block", 'data-content' => 'Have an account already?' %>
+		<%= button_to 'Play', level_path(1), :method => "get", :id => 'menu_play', :class => "btn btn-primary btn-large btn-block", 'data-content' => 'Play the demo!' %>
+		<%= button_to 'Learn', learn_path, :method => "get", :id => 'menu_learn', :class => "btn btn-primary btn-large btn-block", 'data-content' => 'Discover through dance!' %>
+
+
+	</div>

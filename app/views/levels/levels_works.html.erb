@@ -1,0 +1,98 @@
+<!-- got rid of script tag -->
+
+
+
+<h1>Level <%= @level.number %></h1>
+<!--<p id="notice"><%= notice %></p>-->
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div id="game" class="span9">
+      <!-- sound element to play game .wav file -->
+      <audio id='sound' src='/assets/audios/KOI_sound.wav'>Not Compatible</audio>
+      <!-- video element to get camera -->
+      <video id="videoOutput" wmode="opaque" autoplay></video>
+
+      <canvas id="output" width="500" height="660" data-processing-sources="/assets/ProcessingGamePlay/processingGamePlay.pde" width="500" height="660" align="center" tabindex="0" style="image-rendering: -webkit-optimize-contrast !important;"><p>Please upgrade your browser to something new like <a href="https://www.google.com/chrome">Google Chrome</a>.</p></canvas>
+
+
+      
+      <div class='overlay'>
+        <div id='directions'>
+          <%= image_tag("/assets/game/Left_Color.png", :alt => "Left", :id => "L", :class => 'image') %>
+          <% ##image_tag("", :alt => "Right", :id => "R", :class => 'image') %>
+        </div>
+
+        <div id='gametext'>
+
+
+          <p id="demo">
+            
+          </p>
+          <p id="ins">
+            
+          </p>
+          <p id="grade"></p>
+        </div>
+
+        <div id='curves'>
+          <% ##image_tag("", :alt => "Left", :id => "S", :class => 'image') %>
+          <%= image_tag("/assets/game/Straight_Color.png", :alt => "Right", :id => "C", :class => 'image') %>
+        </div>
+
+        
+        <!-- pause and quit game -->
+        <div id='game_menu'>
+          <% if user_signed_in? %>
+            <%= button_to 'Quit', user_path(current_user), :method => "post", :id => 'quit', :class => "btn btn-primary btn-large", data: { confirm: 'Are you sure you want to quit?  Your current progress will be lost.' } %>
+          <% else %>
+            <%= button_to 'Quit', main_menu_path, :method => "get", :id => 'quit', :class => "btn btn-primary btn-large", data: { confirm: 'Are you sure you want to quit?' } %>
+          <% end %>
+        </div>
+    </div>
+      </div>
+
+      
+
+
+    <div id='info' class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="infoLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="infoLabel">Heartbeat Stars - Level <%= @level.number %></h3>
+      </div>
+      <div class="modal-body">
+        <p><!--<a href="#"><i class="icon-facetime-video"></i> Introduction</a>--></p>
+        <p><%= @level.description %></p>
+        <p>
+          <% if user_signed_in? %>
+          Good game!  Your current score has been saved!
+          <%= button_to 'Save Score', score_path(:id => @level.id, :value => 100), :method => "post" %>
+          <% else %>
+          Good game! Sign up to save your score!
+          <%= button_to 'Sign up', new_user_registration_path, :method => "get" %>
+          <% end %>
+      </div>
+    </div>
+    	
+      	
+      	
+    
+  </div>
+</div>
+<p style="margin: auto; background-color: #fff; border-radius: 10px">
+        This website requires <a href="http://chrome.google.com" target="_blank">Google Chrome</a>
+      </p>
+
+
+ <!-- Start Button -->
+<div id="start" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-body">
+      <ol>
+        <li>Make sure you are in a dark room with a flashlight!</li>
+        <li>Allow the browser to use your webcam</li>
+        <li>Press play to start your mission!</li>
+      </ol>
+      <p>Good Luck!</p>
+      <br/>
+      <button id='play' class="btn btn-block btn-primary" aria-hidden="true">Play</button>
+    </div>
+  </div>

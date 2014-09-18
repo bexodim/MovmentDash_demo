@@ -1,0 +1,103 @@
+<h3>Users on movementDash</h3>
+<div class="span11">
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Registered</th>
+      <th>
+        <% if current_user.has_role? :admin %>
+          Role
+        <% end %>
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.name, user %></td>
+      <td><%= user.email %></td>
+      <td><%= user.created_at.to_date %></td>
+      <td>
+        <% if current_user.has_role? :admin %>
+          <%= user.roles.first.name.titleize unless user.roles.first.nil? %>
+        <% end %>
+      </td>
+      <td>
+        <% if current_user.has_role? :admin %>
+          <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
+          <%= render user %>
+        <% end %>
+      </td>
+      <td>
+        <% if current_user.has_role? :admin %>
+          <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %>
+        <% end %>
+        </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h3>Levels</h3>
+<div class="span11">
+<table class="table table-condensed index">
+  <thead>
+    <tr>
+      <th></th>
+      <% if current_user.has_role? :admin %>
+        <th>Data processing</th>
+        <th>Data sound</th>
+      <% else %>
+        <th></th>
+        <th></th>
+      <% end %>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @levels.each do |level| %>
+    <tr>
+      <td><%= link_to 'Level '+level.number.to_s, level %></td>
+      <% if current_user.has_role? :admin %>
+        <td><%= level.data_processing %></td>
+        <td><%= level.data_sound %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+      <% end %>
+      <td><%= level.description %></td>
+      <td><%= button_to 'Play', level, :class => 'btn btn-large btn-block', method: :get  %></td>
+      <% if current_user.has_role? :admin %>
+        <td><%= button_to 'Edit', edit_level_path(level), method: :get, :class => 'btn btn-large btn-block'  %></td>
+        <td><%= button_to 'Destroy', level, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-large btn-block' %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+      <% end %>
+    </tr>
+  <% end %>
+    <tr>
+      <td span='7'>
+        <% if current_user.has_role? :admin %>
+          <%= link_to 'New Level', new_level_path %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

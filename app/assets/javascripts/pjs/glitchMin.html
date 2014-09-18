@@ -1,0 +1,40 @@
+<html>
+
+<head>
+		<title>REMADE Minimized Glitch</title>
+		</head>
+	
+	<body onload="glitch();">
+		<style type="text/css">
+		#video{
+			display: none
+		}
+		#getVideo{
+			display: none
+		}
+		</style>
+
+		<!-- pass the video for canvas to dataurl| GLITCH.JS obtains the media from this canvas and sends it to the out pde -->
+		 <video id="video" autoplay=""></video>
+		
+		<canvas id="getVideo" data-processing-sources="getVideo.pde" tabindex="0" width="600" height="450" style="image-rendering: -webkit-optimize-contrast !important;"></canvas> 
+
+
+		<canvas id="out" data-processing-sources="out.pde" tabindex="0" width="500" height="400" style="image-rendering: -webkit-optimize-contrast !important;"></canvas>
+
+		<canvas id="outPG" data-processing-sources="processingGamePlay.pde" tabindex="0" width="500" height="400" style="image-rendering: -webkit-optimize-contrast !important;"></canvas>
+
+
+
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/processing-1.4.1.min.js"></script>
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/LZWEncoder.js"></script>
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/NeuQuant.js"></script>
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/GIFEncoder.js"></script>
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/b64.js"></script>
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/getUserMedia.js"></script>
+		<script type="text/javascript" src="loadGame.js"></script>
+		<script type="text/javascript" src="http://www.uglitch.com/webglitcher/js/glitch.js"></script>
+
+	</body>
+
+	</html>

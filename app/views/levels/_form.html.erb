@@ -1,0 +1,14 @@
+<%= simple_form_for(@level) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :number %>
+    <%= f.input :data_sound %>
+    <%= f.input :data_processing %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,281 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+
+<head>
+
+
+
+<!-- Processing.js Header -->
+
+<script language="javascript" src="http://localhost/game_KMD/processingDM.js"></script>
+
+<script language="javascript" src="http://makio.free.fr/script/ProcessingJSTargetCanvasId.js"></script>
+
+
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+
+<style type="text/css">
+
+#videoOutput{
+
+display: none;
+
+}
+
+#output{
+
+align: center;
+
+}
+
+</style>
+
+
+
+<video id="videoOutput" width="500px" height="660px" autoplay=""></video>
+
+
+
+
+
+<canvas id="output" width="500" height="660" align="center" tabindex="0" style="image-rendering: -webkit-optimize-contrast !important;"><p>Please upgrade your browser to something new like <a href="https://www.google.com/chrome">Google Chrome</a>.</p>
+
+</canvas><script type="application/processing" target="output">
+
+
+
+
+
+/*
+
+GetUserMedia script from http://www.html5rocks.com/en/tutorials/webgl/jsartoolkit_webrtc/
+
+*/
+
+var video = document.getElementById("videoOutput");
+
+
+
+var getUserMedia = function(t, onsuccess, onerror) {
+
+  if (navigator.getUserMedia) {
+
+    return navigator.getUserMedia(t, onsuccess, onerror);
+
+  } else if (navigator.webkitGetUserMedia) {
+
+    return navigator.webkitGetUserMedia(t, onsuccess, onerror);
+
+  } else if (navigator.mozGetUserMedia) {
+
+    return navigator.mozGetUserMedia(t, onsuccess, onerror);
+
+  } else if (navigator.msGetUserMedia) {
+
+    return navigator.msGetUserMedia(t, onsuccess, onerror);
+
+  } else {
+
+    onerror(new Error("No getUserMedia implementation found."));
+
+  }
+
+};
+
+
+
+var URL = window.URL || window.webkitURL;
+
+var createObjectURL = URL.createObjectURL || webkitURL.createObjectURL;
+
+if (!createObjectURL) {
+
+  throw new Error("URL.createObjectURL not found.");
+
+}
+
+
+
+getUserMedia({audio:false, video:true},
+
+  function(stream) {
+
+    var url = createObjectURL(stream);
+
+    video.src = url;
+
+  },
+
+  function(error) {
+
+    alert("Couldn't access webcam.");
+
+  }
+
+);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////P5JS
+
+//Canvas drawing context for the running sketch.
+
+
+
+var ctx;
+
+PImage img;
+
+int i,j;
+
+int nb=20;
+
+int currframe = -1;
+
+
+
+
+
+void setup(){
+
+size(500,660);
+
+ctx = externals.context;
+
+ellipseMode(CORNER);
+
+smooth();
+
+background(0);
+
+
+//<!-- Line or Curve Inits -->
+
+  
+
+  ArrayList<Integer> queueX = new ArrayList(); 
+
+  ArrayList<Integer> queueY = new ArrayList();
+
+   
+
+  
+
+  
+
+       
+
+  
+
+}
+
+
+
+void draw(){
+
+//<!-- BrightestPixs Inits -->
+
+float brightestValue = 0;
+
+int brightestY = 0; 
+
+    int brightestX = 0;
+
+
+ArrayList<Integer[]> LevelTuples = new ArrayList<Integer[]>(new Integer[] {2, 2, 200, 30}, 
+
+        new Integer[] {1, 2, 500, 60}); 
+
+
+Integer[] directions;
+
+int LorR; int linetype; int windowSpan;
+
+
+  boolean checking = true;
+
+  
+
+
+//<!-- Ellipse Img Init -->
+
+pushMatrix();
+
+translate(width,0);
+
+scale(-1,1);//mirror the video
+
+ctx.drawImage(video, 0, 0, width, height); //video is defined inside getUserMedia.js
+
+popMatrix();
+
+
+
+
+//do something
+
+img = get();
+
+img.resize(nb,nb);
+
+background(255);
+
+noStroke();
+
+
+
+for(j=0; j<nb; j++){
+
+for(i=0;i<nb; i++){
+
+int color = img.get(i, j);
+
+fill(color);
+
+float vb = brightness(color);
+
+
+if (vb > brightestValue){
+
+                brightestValue = vb; 
+
+                brightestY = j*height/nb; 
+
+                brightestX = i*width/nb;
+
+              
+
+             }
+
+             
+
+ellipse(i*width/nb, j*height/nb, width/nb, height/nb);
+
+}
+
+
+fill(255, 204, 0, 128); ellipse(brightestX, brightestY, 50, 50);
+
+}
+
+
+
+
+
+}
+
+
+
+</script>
+

@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <!--<p>picture</p>-->
+    <p><%= image_tag @user.avatar.url(:medium) %></p>
+    <p><%= @user.name %></p>
+    <p>Email: <%= @user.email if @user.email %></p>
+    <!--<p>badges</p>-->
+  </div>
+
+  <br/>
+
+  <h3>Completed Levels</h3>
+  <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <% @levels.each do |level| %>
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Level <%= level.number %>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <p>Current Score</p><p><%= @user.scores.where(:level_id => 1).first.value %></p>
+        <p>Accuracy</p><p>100%</p>
+        <p><%= level.description %></p>
+        <p><%= link_to 'Replay Level', level_path(level.id) %></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>

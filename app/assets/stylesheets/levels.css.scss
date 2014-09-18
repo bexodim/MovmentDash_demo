@@ -1,0 +1,112 @@
+// Place all the styles related to the Levels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	font-size: 1em;
+}
+
+#game {
+	background-color: black;
+	width: 100%;
+	height: 500px;
+	color: white;
+}
+
+video {
+	height: 100%;
+	width: 100%;
+    position:relative;
+    left: 0;
+    top: 0;
+    z-index:0;
+    image-rendering: -webkit-optimize-contrast !important;
+}
+
+#directions {
+	position: relative;
+	top: 0;
+	text-align: center;
+	width: 100%;
+	margin: auto;
+	height: 100px;
+}
+
+#directions img {
+	cursor:pointer;
+}
+
+
+#gametext {
+	position: relative;
+	top: 10px;
+	width: 600px;
+	height: 200px;
+	color: #fff;
+	-webkit-text-stroke: 1px black;
+	font-family: 'Iceland', cursive;
+	margin: auto;
+	font-size: 2em;
+	line-height: 1em;
+}
+
+#curves {
+	position: relative;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
+	margin: auto;
+	height: 100px;
+}
+#game_menu {
+	position:relative;
+	left: 500px;
+	top: 10px;
+}
+
+
+
+
+.overlay {
+	text-align: center;
+    position:relative;
+    left: 0;
+    top: -490px;
+    z-index:1;
+    height: 100%;
+	width: 100%;
+}
+
+.image {
+	height: 100px;
+	width: 100px;
+}
+
+#grade {
+	font-size: 2em;
+	line-height: 2em;
+}
+
+
+#video{
+	display: none;
+}
+#getVideo{
+	height: 100%;
+	width: 100%;
+    position:relative;
+    left: 0;
+    top: 0;
+    z-index:0;
+	image-rendering: -webkit-optimize-contrast !important;
+	/*display: none;*/
+}
+#gamePlay{
+	height: 98%;
+	width: 100%;
+    position:relative;
+    left: 0;
+    top: -10px;
+	image-rendering: -webkit-optimize-contrast !important;
+	/*display: none;*/
+}
